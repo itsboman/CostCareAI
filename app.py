@@ -5,14 +5,13 @@ import base64
 import os
 
 
-# ==============================
-# ✅ PAGE CONFIG
-# ==============================
+
+#  PAGE CONFIG
+
 st.set_page_config(page_title="CostCareAI", page_icon="logo(2).png", layout="centered")
 
-# ==============================
-# ✅ CUSTOM STYLING (Dark Theme)
-# ==============================
+#  STYLING (Dark Theme)
+
 st.markdown("""
     <style>
         body {
@@ -81,18 +80,16 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ==============================
-# ✅ LOAD MODEL
-# ==============================
+#  LOAD MODEL
+
 model_path = "model.pkl"
 if not os.path.exists(model_path):
-    st.error("❌ Model file 'model.pkl' not found! Please place it in the same folder as this script.")
+    st.error(" Model file 'model.pkl' not found! Please place it in the same folder as this script.")
 else:
     model = joblib.load(model_path)
 
-# ==============================
-# ✅ LOGO + TITLE
-# ==============================
+#  LOGO + TITLE
+
 logo_path = "logo(2).png"  # Ensure this file is in the same folder as app.py
 
 if os.path.exists(logo_path):
@@ -105,14 +102,13 @@ if os.path.exists(logo_path):
         </div>
     """, unsafe_allow_html=True)
 else:
-    st.warning("⚠️ Logo not found. Make sure 'logo(2).png' is in the same folder as app.py")
+    st.warning(" Logo not found. Make sure 'logo(2).png' is in the same folder as app.py")
 
 st.markdown('<div class="title"> Hospital Bill Prediction System</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle">Predict estimated medical expenses based on patient details</div>', unsafe_allow_html=True)
 
-# ==============================
-# ✅ USER INPUT SECTION
-# ==============================
+#  USER INPUT SECTION
+
 st.markdown("###  Enter Patient Details")
 
 col1, col2 = st.columns(2)
@@ -124,10 +120,8 @@ with col2:
     gender = st.selectbox("Gender", ["male", "female"])
     smoker = st.selectbox("Smoker?", ["yes", "no"])
     region = st.selectbox("Region", ["northeast", "northwest", "southeast", "southwest"])
+#  PREDICTION
 
-# ==============================
-# ✅ PREDICTION
-# ==============================
 if st.button(" Predict Hospital Bill"):
     # Convert categorical inputs into numeric (same as your training encodings)
     sex_encoded = 1 if gender == "male" else 0
@@ -157,10 +151,10 @@ if st.button(" Predict Hospital Bill"):
             </div>
             """, unsafe_allow_html=True)
     except Exception as e:
-        st.error(f"⚠️ Something went wrong: {e}")
-# 💾 Save model using joblib
+        st.error(f" Something went wrong: {e}")
+#  Save model using joblib
 joblib.dump(model, "model.pkl")
-print("💾 Model saved as model.pkl")
+print("Model saved as model.pkl")
 
 
 
