@@ -156,5 +156,3 @@ if st.button(" Predict Hospital Bill"):
 joblib.dump(model, "model.pkl")
 print("Model saved as model.pkl")
 
-
-
